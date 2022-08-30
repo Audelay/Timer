@@ -47,10 +47,10 @@ $(document).ready(function () {
 				$("#mins").text(mins + ":");
 				}
 			//Styling for seconds - if its below 10, we need to add a zero in front of it.
-			if (seconds < 10) {
-				$("#seconds").text("0" + seconds);
+			if (secs < 10) {
+				$("#seconds").text("0" + secs);
 			} else {
-				$("#seconds").text(seconds);
+				$("#seconds").text(secs);
 			}
 		}
 	//function that actually does the work to run the timer
