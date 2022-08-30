@@ -118,7 +118,7 @@ $(document).ready(function () {
 	function resetTime () {
 		hours = setHours;
 		mins = setMins;
-		seconds = setSecs;
+		secs = setSecs;
 		stopTime();
 		showTimer();
 		setDesign();
