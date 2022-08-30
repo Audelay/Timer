@@ -1,26 +1,27 @@
 $(document).ready(function () {
-	
-	//The three global timer variables
 
-	//setMins is used for the current time logged - can change between workMins and restMins
+	//setHours/Mins/Secs stores time used by resetTime()
 	let setHours = 0;
 	let setMins = 0;
 	let setSecs = 10;
 
+	//hours/mins/secs are use by runtimer 
+	let hours = setHours;
+	let mins = setMins;
+	let secs = setSecs;
+
 	//milliseconds is for our circle to know how much to change per millisecond. It's worked out using the setHours/Mins/Secs
-	//centiSecs is for changing every 10 miliseconds.
 	let millisecs;
+
+	function millisecSet(){
+		millisecs = setSecs*1000 + setMins*60*1000 + setHours*60*60*1000;
+		}
 	
 	//isRunning just checks to see if the program is already going - without it, the program will run multiple times on multiple clicks
 	let isRunning = false;
 	
-	// Grabbing the circumference of the circle
-	let circ;
+	let circ; //For the cirumference of the circle
 	
-	function millisecSet(){
-		millisecs = setSecs*1000 + setMins*60*1000 + setHours*60*60*1000;
-		}
-
 	function setDesign() {
 		//below code just grabs the radius from the string of "(NUM)px" and converts it to number
 		let rad = $('#circle').css('r');
@@ -32,7 +33,7 @@ $(document).ready(function () {
 		$('#circle').css('stroke-dashoffset', circ);
 	}
 	//function for displaying the correct digits in the right display on screen
-	function showTimer(hours, mins, seconds) {
+	function showTimer() {
 		//Styling for hours - if its below 10, we need to add a zero in front of it.
 			if (hours < 10) {
 				$("#hours").text("0" + hours + ":");
@@ -53,31 +54,28 @@ $(document).ready(function () {
 			}
 		}
 	//function that actually does the work to run the timer
-	function runTimer(hours, mins, seconds) {
-		let h = hours
-		let m = mins
-		let s = seconds
+	function runTimer() {
 			timex = setTimeout(function () {
-				if (s > 0){
-					s--;
-					runTimer(h, m, s);
-				} else if (s <= 0){
-					if(m > 0) {
-						m--;
-						s = 59;
-						runTimer(h, m, s);
-					} else if (m <= 0){
-						if(h > 0){
-							h--;
-							m=59;
-							s=59;
-							runTimer(h, m, s);
-						} else if (h <= 0){
+				if (secs > 0){
+					secs--;
+					runTimer();
+				} else if (secs <= 0){
+					if(mins > 0) {
+						mins--;
+						secs = 59;
+						runTimer();
+					} else if (mins <= 0){
+						if(hours > 0){
+							hours--;
+							mins=59;
+							secs=59;
+							runTimer();
+						} else if (hours <= 0){
 							return;
 						}
 					}
 				}
-				 showTimer(h, m, s);
+				 showTimer();
 			}, 1000);
 		} 
 	//function that does the color and circle animations
@@ -102,7 +100,7 @@ $(document).ready(function () {
 	//The three functions that run through each button
 	function startTime () {
 	if (isRunning == false) {
-		runTimer(setHours, setMins, setSecs);
+		runTimer();
 		animateDesign();
 	} else {
 		return;
@@ -121,8 +119,8 @@ $(document).ready(function () {
 		hours = setHours;
 		mins = setMins;
 		seconds = setSecs;
-		showTimer(hours, mins, seconds);
 		stopTime();
+		showTimer();
 		setDesign();
 	}
 	
@@ -134,6 +132,6 @@ $(document).ready(function () {
 	
 	//Run these functions on load 
 	millisecSet();
-	showTimer(setHours, setMins, setSecs);
+	showTimer();
 	setDesign();
 });
