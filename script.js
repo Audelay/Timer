@@ -91,10 +91,11 @@ $(document).ready(function () {
 		setSecs = parseFloat(document.getElementById("custSec").value);
 
 		millisecSet();
-		showTimer(setHours, setMins, setSecs);
+		showTimer();
 		stopTime();
 		setDesign();
 	}
+	
 	$("#custUpdate").click(customTimer);
 	
 	//The three functions that run through each button
