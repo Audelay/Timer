@@ -38,14 +38,14 @@ svg{
 	display:flex;
 	justify-content: center;
 }
-.buttons {
+#buttons {
 	margin:auto;
 	display: flex;
 	background-color: rgba(0,0,0,0);
 	margin-top:3rem;
 	justify-content: center;
 }
-.buttons button {
+#buttons button, #custUpdate {
 	font-size: 30px;
 	background-color: rgba(0,0,0,0);
 	border-color: white;
@@ -57,7 +57,7 @@ svg{
 	padding: 0.3rem 2rem;
 }
 
-.buttons button:hover{
+#buttons button:hover, #custUpdate:hover{
 	background-color:white;
 	color:black;
 	border-color: white;
