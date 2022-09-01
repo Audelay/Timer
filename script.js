@@ -91,9 +91,7 @@ $(document).ready(function () {
 		setSecs = parseFloat(document.getElementById("custSec").value);
 
 		millisecSet();
-		showTimer();
-		stopTime();
-		setDesign();
+		resetTime();
 	}
 	
 	$("#custUpdate").click(customTimer);
