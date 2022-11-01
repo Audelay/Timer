@@ -1,5 +1,9 @@
 $(document).ready(function () {
 
+	$('.dropbtn').click(function() {
+		$('.dropdown-content').toggle("slide");
+	  });
+
 	//setHours/Mins/Secs stores time used by resetTime()
 	let setHours = 0;
 	let setMins = 0;
@@ -30,6 +34,7 @@ $(document).ready(function () {
 		//circ is our circumference, to be used with css value "stroke-dasharray"
 		circ = rad * 2 * Math.PI;
 		$('#circle').css('stroke-dasharray', circ);
+		$('#circleGrey').css('stroke-dasharray', circ);
 		$('#circle').css('stroke-dashoffset', circ);
 	}
 	//function for displaying the correct digits in the right display on screen
@@ -90,7 +95,18 @@ $(document).ready(function () {
 		setMins = parseFloat(document.getElementById("custMin").value);
 		setSecs = parseFloat(document.getElementById("custSec").value);
 
+		if (setSecs >= 60){
+			setMins++;
+			setSecs = setSecs-60;
+		};
+
+		if (setMins >= 60){
+			setHours++;
+			setMins = setMins-60;
+		};
+
 		millisecSet();
+		runTimer();
 		resetTime();
 	}
 	
